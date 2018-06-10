@@ -42,7 +42,6 @@ public class Main extends javax.swing.JFrame {
         btnVenda = new javax.swing.JButton();
         btnCliente = new javax.swing.JButton();
         btnVendedor = new javax.swing.JButton();
-        btnInstituicao = new javax.swing.JButton();
         btnServico = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
         lblOpcao = new javax.swing.JLabel();
@@ -66,7 +65,7 @@ public class Main extends javax.swing.JFrame {
         btnVenda.setBackground(new java.awt.Color(66, 139, 202));
         btnVenda.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         btnVenda.setText("Realizar Venda");
-        btnVenda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVenda.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVendaActionPerformed(evt);
@@ -76,7 +75,7 @@ public class Main extends javax.swing.JFrame {
         btnCliente.setBackground(new java.awt.Color(66, 139, 202));
         btnCliente.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         btnCliente.setText("Cliente");
-        btnCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClienteActionPerformed(evt);
@@ -86,27 +85,17 @@ public class Main extends javax.swing.JFrame {
         btnVendedor.setBackground(new java.awt.Color(66, 139, 202));
         btnVendedor.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         btnVendedor.setText("Vendedor");
-        btnVendedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVendedor.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnVendedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVendedorActionPerformed(evt);
             }
         });
 
-        btnInstituicao.setBackground(new java.awt.Color(66, 139, 202));
-        btnInstituicao.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        btnInstituicao.setText("Instituição");
-        btnInstituicao.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnInstituicao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInstituicaoActionPerformed(evt);
-            }
-        });
-
         btnServico.setBackground(new java.awt.Color(66, 139, 202));
         btnServico.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         btnServico.setText("Serviço");
-        btnServico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnServico.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnServicoActionPerformed(evt);
@@ -116,7 +105,7 @@ public class Main extends javax.swing.JFrame {
         btnExit.setBackground(new java.awt.Color(217, 83, 79));
         btnExit.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         btnExit.setText("Sair");
-        btnExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExit.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
@@ -133,7 +122,7 @@ public class Main extends javax.swing.JFrame {
         lblGithubLink.setBackground(new java.awt.Color(255, 255, 255));
         lblGithubLink.setForeground(new java.awt.Color(0, 0, 255));
         lblGithubLink.setText("https://github.com/joaopedromago");
-        lblGithubLink.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblGithubLink.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblGithubLink.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblGithubLinkMouseClicked(evt);
@@ -149,20 +138,19 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(pnlOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblOpcao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnVenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnServico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnVendedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnInstituicao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnlOptionsLayout.createSequentialGroup()
                         .addGroup(pnlOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblSubs)
                             .addComponent(lblGithubLink))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btnServico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOptionsLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOptionsLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
         );
         pnlOptionsLayout.setVerticalGroup(
             pnlOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,13 +163,11 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(btnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnInstituicao, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(23, 23, 23)
                 .addComponent(btnServico, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
                 .addComponent(lblSubs)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblGithubLink)
@@ -260,10 +246,6 @@ public class Main extends javax.swing.JFrame {
         new VendedorPage().setVisible(true);
     }//GEN-LAST:event_btnVendedorActionPerformed
 
-    private void btnInstituicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInstituicaoActionPerformed
-        new InstituicaoPage().setVisible(true);
-    }//GEN-LAST:event_btnInstituicaoActionPerformed
-
     private void btnServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServicoActionPerformed
         new ServicoPage().setVisible(true);
     }//GEN-LAST:event_btnServicoActionPerformed
@@ -317,7 +299,6 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCliente;
     private javax.swing.JButton btnExit;
-    private javax.swing.JButton btnInstituicao;
     private javax.swing.JButton btnServico;
     private javax.swing.JButton btnVenda;
     private javax.swing.JButton btnVendedor;

@@ -20,8 +20,11 @@ public class ClienteRepository {
     public boolean salvar(Cliente cliente) {
         try {
             String query = "INSERT INTO CLIENTES "
-                    + "(pessoaId, numeroCompras) "
-                    + "VALUES (" + cliente.getPessoaId() + ", " + cliente.getNumeroCompras() + ")";
+                    + "(nome,cpf,rg,endereco,telefone,email, numeroCompras) "
+                    + "VALUES (" + cliente.getNome() + "," + cliente.getCpf()
+                    + "," + cliente.getRg() + "," + cliente.getEndereco()
+                    + "," + cliente.getTelefone() + "," + cliente.getEmail()
+                    + ", " + cliente.getNumeroCompras() + ")";
 
             return db.ExecuteQuery(query);
 
@@ -32,10 +35,12 @@ public class ClienteRepository {
 
     public boolean atualizar(Cliente cliente) {
         try {
-            String query = "UPDATE CLIENTES "
-                    + "set pessoaId = " + cliente.getPessoaId() + ", "
-                    + "numeroCompras = " + cliente.getNumeroCompras()
-                    + "where id = " + cliente.getId();
+            String query = "UPDATE CLIENTES set "
+                    + " nome = " + cliente.getNome() + ", cpf = " + cliente.getCpf()
+                    + ", rg = " + cliente.getRg() + ", endereço = " + cliente.getEndereco()
+                    + ", telefone = " + cliente.getTelefone() + ", email = " + cliente.getEmail()
+                    + ", numeroCompras = " + cliente.getNumeroCompras()
+                    + " WHERE id = " + cliente.getId();
 
             return db.ExecuteQuery(query);
 
@@ -106,11 +111,16 @@ public class ClienteRepository {
 
     private Cliente obterCliente(ResultSet rs) throws SQLException {
         Cliente cliente = new Cliente();
-        cliente.setId(rs.getInt("Id"));
-        cliente.setDataCriacao(rs.getDate("DataCriacao"));
-        cliente.setDataExclusao(rs.getDate("DataExclusao"));
-        cliente.setNumeroCompras(rs.getInt("NumeroCompras"));
-        cliente.setPessoaId(rs.getInt("PessoaId"));
+        cliente.setId(rs.getInt("id"));
+        cliente.setDataCriacao(rs.getDate("dataCriacao"));
+        cliente.setDataExclusao(rs.getDate("dataExclusao"));
+        cliente.setNumeroCompras(rs.getInt("numeroCompras"));
+        cliente.setNome(rs.getString("nome"));
+        cliente.setCpf(rs.getString("cpf"));
+        cliente.setRg(rs.getString("rg"));
+        cliente.setEndereco(rs.getString("endereço"));
+        cliente.setTelefone(rs.getString("telefone"));
+        cliente.setEmail(rs.getString("email"));
 
         return cliente;
     }
