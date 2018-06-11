@@ -55,8 +55,9 @@ public class Main extends javax.swing.JFrame {
         setTitle("SellSpace");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setLocation(new java.awt.Point(0, 0));
-        setMaximumSize(new java.awt.Dimension(800, 600));
-        setMinimumSize(new java.awt.Dimension(800, 600));
+        setLocationByPlatform(true);
+        setMaximumSize(new java.awt.Dimension(1024, 768));
+        setMinimumSize(new java.awt.Dimension(1024, 768));
         setName("frameMain"); // NOI18N
         setResizable(false);
 
@@ -167,7 +168,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(btnServico, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 316, Short.MAX_VALUE)
                 .addComponent(lblSubs)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblGithubLink)
@@ -177,9 +178,11 @@ public class Main extends javax.swing.JFrame {
         pnlLogo.setBackground(new java.awt.Color(255, 255, 255));
 
         lblLogo.setFont(new java.awt.Font("Vladimir Script", 1, 90)); // NOI18N
+        lblLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblLogo.setText("SellSpace");
 
         lblLogo2.setFont(new java.awt.Font("Vladimir Script", 0, 32)); // NOI18N
+        lblLogo2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblLogo2.setText("You search, you find");
 
         javax.swing.GroupLayout pnlLogoLayout = new javax.swing.GroupLayout(pnlLogo);
@@ -187,14 +190,14 @@ public class Main extends javax.swing.JFrame {
         pnlLogoLayout.setHorizontalGroup(
             pnlLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlLogoLayout.createSequentialGroup()
-                .addContainerGap(67, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(pnlLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLogoLayout.createSequentialGroup()
-                        .addComponent(lblLogo2, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(67, 67, 67))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLogoLayout.createSequentialGroup()
-                        .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50))))
+                    .addGroup(pnlLogoLayout.createSequentialGroup()
+                        .addComponent(lblLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(pnlLogoLayout.createSequentialGroup()
+                        .addComponent(lblLogo2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(20, 20, 20))))
         );
         pnlLogoLayout.setVerticalGroup(
             pnlLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,8 +225,7 @@ public class Main extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlOptions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(pnlOptions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();

@@ -1,11 +1,11 @@
 package Model;
 
 public class ServicoVendedor extends BaseModel {
-	private int quantidadeServicos;
 	private int servicoId;
 	private int vendedorId;
 	private Servico servico;
 	private Vendedor vendedor;
+	private int quantidadeServicos;
 
         public int getQuantidadeServicos() {
             return quantidadeServicos;
