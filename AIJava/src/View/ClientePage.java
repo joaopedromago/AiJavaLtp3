@@ -86,7 +86,7 @@ public class ClientePage extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(51, 204, 0));
         jButton1.setText("Salvar");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -95,11 +95,11 @@ public class ClientePage extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(255, 51, 51));
         jButton2.setText("Excluir");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jButton3.setBackground(new java.awt.Color(0, 153, 255));
         jButton3.setText("Carregar");
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -133,6 +133,7 @@ public class ClientePage extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTable1);
+        jTable1.getAccessibleContext().setAccessibleName("gridCliente");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -212,6 +213,13 @@ public class ClientePage extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(30, Short.MAX_VALUE))
         );
+
+        jTextField1.getAccessibleContext().setAccessibleName("txtNome");
+        jTextField2.getAccessibleContext().setAccessibleName("txtCpf");
+        jTextField3.getAccessibleContext().setAccessibleName("txtRG");
+        jTextField4.getAccessibleContext().setAccessibleName("txtEndereco");
+        jTextField5.getAccessibleContext().setAccessibleName("txtTelefone");
+        jTextField6.getAccessibleContext().setAccessibleName("txtEmail");
 
         pack();
         setLocationRelativeTo(null);
