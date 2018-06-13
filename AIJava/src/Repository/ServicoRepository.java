@@ -20,10 +20,10 @@ public class ServicoRepository {
 
     public boolean salvar(Servico servico) {
         try {
-            String query = "INSERT INTO SERVICOS "
+            String query = "INSERT INTO servico "
                     + "(nome,preco,tiposervico) "
-                    + "VALUES (" + servico.getNome() + "," + servico.getPreco()
-                    + "," + servico.getTipoServico() + ")";
+                    + "VALUES ('" + servico.getNome() + "','" + servico.getPreco()
+                    + "','" + servico.getTipoServico() + "')";
 
             return db.ExecuteQuery(query);
 
@@ -34,10 +34,10 @@ public class ServicoRepository {
 
     public boolean atualizar(Servico servico) {
         try {
-            String query = "UPDATE SERVICOS set "
-                    + " nome = " + servico.getNome() + ", preco = " + servico.getPreco()
-                    + ", tiposervico = " + servico.getTipoServico()
-                    + " WHERE id = " + servico.getId();
+            String query = "UPDATE servico set "
+                    + " nome = '" + servico.getNome() + "', preco = '" + servico.getPreco()
+                    + "', tiposervico = '" + servico.getTipoServico()
+                    + "' WHERE id = " + servico.getId();
 
             return db.ExecuteQuery(query);
 
@@ -48,7 +48,7 @@ public class ServicoRepository {
 
     public boolean remover(int id) {
         try {
-            String query = "DELETE SERVICOS "
+            String query = "DELETE servico "
                     + "where id = " + id;
 
             return db.ExecuteQuery(query);
@@ -60,7 +60,7 @@ public class ServicoRepository {
 
     public Servico obterServico(int id) {
         try {
-            String query = "SELECT * FROM SERVICOS "
+            String query = "SELECT * FROM servico "
                     + "WHERE ID = " + id;
 
             Servico servico = new Servico();
@@ -87,7 +87,7 @@ public class ServicoRepository {
         try {
             List<Servico> servicos = new ArrayList<Servico>();
 
-            String query = "SELECT * FROM SERVICOS ";
+            String query = "SELECT * FROM servico ";
 
             ResultSet rs = db.ExecuteQuerySelect(query);
             while (rs.next()) {

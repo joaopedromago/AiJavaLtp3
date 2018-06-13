@@ -19,12 +19,12 @@ public class VendedorRepository {
 
     public boolean salvar(Vendedor vendedor) {
         try {
-            String query = "INSERT INTO VENDEDORES "
+            String query = "INSERT INTO vendedor "
                     + "(nome,cpf,rg,endereco,telefone,email) "
-                    + "VALUES (" + vendedor.getNome() + "," + vendedor.getCpf() 
-                    + "," + vendedor.getRg() + "," + vendedor.getEndereco() 
-                    + "," + vendedor.getTelefone() + "," + vendedor.getEmail() 
-                    + ")";
+                    + "VALUES ('" + vendedor.getNome() + "','" + vendedor.getCpf() 
+                    + "','" + vendedor.getRg() + "','" + vendedor.getEndereco() 
+                    + "','" + vendedor.getTelefone() + "','" + vendedor.getEmail() 
+                    + "')";
 
             return db.ExecuteQuery(query);
 
@@ -35,11 +35,11 @@ public class VendedorRepository {
 
     public boolean atualizar(Vendedor vendedor) {
         try {
-            String query = "UPDATE VENDEDORES set "
-+ " nome = " + vendedor.getNome() + ", cpf = " + vendedor.getCpf() 
-+ ", rg = " + vendedor.getRg() + ", endereço = " + vendedor.getEndereco() 
-+ ", telefone = " + vendedor.getTelefone() + ", email = " + vendedor.getEmail()
-                    + " WHERE id = " + vendedor.getId();
+            String query = "UPDATE vendedor set "
++ " nome = '" + vendedor.getNome() + "', cpf = '" + vendedor.getCpf() 
++ "', rg = '" + vendedor.getRg() + "', endereço = '" + vendedor.getEndereco() 
++ "', telefone = '" + vendedor.getTelefone() + "', email = '" + vendedor.getEmail()
+                    + "' WHERE id = " + vendedor.getId();
 
             return db.ExecuteQuery(query);
 
@@ -50,7 +50,7 @@ public class VendedorRepository {
 
     public boolean remover(int id) {
         try {
-            String query = "DELETE VENDEDORES "
+            String query = "DELETE vendedor "
                     + "where id = " + id;
 
             return db.ExecuteQuery(query);
@@ -62,7 +62,7 @@ public class VendedorRepository {
 
     public Vendedor obterVendedor(int id) {
         try {
-            String query = "SELECT * FROM VENDEDORES "
+            String query = "SELECT * FROM vendedor "
                     + "WHERE ID = " + id;
 
             Vendedor vendedor = new Vendedor();
@@ -89,7 +89,7 @@ public class VendedorRepository {
         try {
             List<Vendedor> vendedors = new ArrayList<Vendedor>();
 
-            String query = "SELECT * FROM VENDEDORES ";
+            String query = "SELECT * FROM vendedor ";
 
             ResultSet rs = db.ExecuteQuerySelect(query);
             while (rs.next()) {

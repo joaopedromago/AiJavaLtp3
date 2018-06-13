@@ -19,10 +19,11 @@ public class ServicoVendedorRepository {
 
     public boolean salvar(ServicoVendedor servicoVendedor) {
         try {
-            String query = "INSERT INTO SERVICOSVENDEDORESS "
+            String query = "INSERT INTO servicoVendedor "
                     + "(quantidadeServicos,servicoId,vendedorId) "
-                    + "VALUES (" + servicoVendedor.getQuantidadeServicos() + "," + servicoVendedor.getServicoId()
-                    + "," + servicoVendedor.getVendedorId() + ")";
+                    + "VALUES ('" + servicoVendedor.getQuantidadeServicos() + "','" 
+                    + servicoVendedor.getServicoId()
+                    + "','" + servicoVendedor.getVendedorId() + "')";
 
             return db.ExecuteQuery(query);
 
@@ -33,11 +34,11 @@ public class ServicoVendedorRepository {
 
     public boolean atualizar(ServicoVendedor servicoVendedor) {
         try {
-            String query = "UPDATE SERVICOSVENDEDORESS set "
-                    + " quantidadeServicos = " + servicoVendedor.getQuantidadeServicos()
-                    + ", servicoId = " + servicoVendedor.getServicoId()
-                    + ", vendedorId = " + servicoVendedor.getVendedorId()
-                    + " WHERE id = " + servicoVendedor.getId();
+            String query = "UPDATE servicoVendedor set "
+                    + " quantidadeServicos = '" + servicoVendedor.getQuantidadeServicos()
+                    + "', servicoId = '" + servicoVendedor.getServicoId()
+                    + "', vendedorId = '" + servicoVendedor.getVendedorId()
+                    + "' WHERE id = " + servicoVendedor.getId();
 
             return db.ExecuteQuery(query);
 
@@ -48,7 +49,7 @@ public class ServicoVendedorRepository {
 
     public boolean remover(int id) {
         try {
-            String query = "DELETE SERVICOSVENDEDORESS "
+            String query = "DELETE servicoVendedor "
                     + "where id = " + id;
 
             return db.ExecuteQuery(query);
@@ -60,7 +61,7 @@ public class ServicoVendedorRepository {
 
     public ServicoVendedor obterServicoVendedor(int id) {
         try {
-            String query = "SELECT * FROM SERVICOSVENDEDORESS "
+            String query = "SELECT * FROM servicoVendedor "
                     + "WHERE ID = " + id;
 
             ServicoVendedor servicoVendedor = new ServicoVendedor();
@@ -87,7 +88,7 @@ public class ServicoVendedorRepository {
         try {
             List<ServicoVendedor> servicoVendedors = new ArrayList<ServicoVendedor>();
 
-            String query = "SELECT * FROM SERVICOSVENDEDORESS ";
+            String query = "SELECT * FROM servicoVendedor ";
 
             ResultSet rs = db.ExecuteQuerySelect(query);
             while (rs.next()) {

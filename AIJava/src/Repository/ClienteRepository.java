@@ -19,12 +19,12 @@ public class ClienteRepository {
 
     public boolean salvar(Cliente cliente) {
         try {
-            String query = "INSERT INTO CLIENTES "
+            String query = "INSERT INTO cliente "
                     + "(nome,cpf,rg,endereco,telefone,email, numeroCompras) "
-                    + "VALUES (" + cliente.getNome() + "," + cliente.getCpf()
-                    + "," + cliente.getRg() + "," + cliente.getEndereco()
-                    + "," + cliente.getTelefone() + "," + cliente.getEmail()
-                    + ", " + cliente.getNumeroCompras() + ")";
+                    + "VALUES ('" + cliente.getNome() + "','" + cliente.getCpf()
+                    + "','" + cliente.getRg() + "','" + cliente.getEndereco()
+                    + "','" + cliente.getTelefone() + "','" + cliente.getEmail()
+                    + "', '" + cliente.getNumeroCompras() + "')";
 
             return db.ExecuteQuery(query);
 
@@ -35,12 +35,12 @@ public class ClienteRepository {
 
     public boolean atualizar(Cliente cliente) {
         try {
-            String query = "UPDATE CLIENTES set "
-                    + " nome = " + cliente.getNome() + ", cpf = " + cliente.getCpf()
-                    + ", rg = " + cliente.getRg() + ", endereço = " + cliente.getEndereco()
-                    + ", telefone = " + cliente.getTelefone() + ", email = " + cliente.getEmail()
-                    + ", numeroCompras = " + cliente.getNumeroCompras()
-                    + " WHERE id = " + cliente.getId();
+            String query = "UPDATE cliente set "
+                    + " nome = '" + cliente.getNome() + "', cpf = '" + cliente.getCpf()
+                    + "', rg = '" + cliente.getRg() + "', endereço = '" + cliente.getEndereco()
+                    + "', telefone = '" + cliente.getTelefone() + "', email = '" + cliente.getEmail()
+                    + "', numeroCompras = '" + cliente.getNumeroCompras()
+                    + "' WHERE id = " + cliente.getId();
 
             return db.ExecuteQuery(query);
 
@@ -51,7 +51,7 @@ public class ClienteRepository {
 
     public boolean remover(int id) {
         try {
-            String query = "DELETE CLIENTES "
+            String query = "DELETE cliente "
                     + "where id = " + id;
 
             return db.ExecuteQuery(query);
@@ -63,7 +63,7 @@ public class ClienteRepository {
 
     public Cliente obterCliente(int id) {
         try {
-            String query = "SELECT * FROM CLIENTES "
+            String query = "SELECT * FROM cliente "
                     + "WHERE ID = " + id;
 
             Cliente cliente = new Cliente();
@@ -90,7 +90,7 @@ public class ClienteRepository {
         try {
             List<Cliente> clientes = new ArrayList<Cliente>();
 
-            String query = "SELECT * FROM CLIENTES ";
+            String query = "SELECT * FROM cliente ";
 
             ResultSet rs = db.ExecuteQuerySelect(query);
             while (rs.next()) {

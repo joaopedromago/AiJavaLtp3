@@ -19,10 +19,10 @@ public class VendaRepository {
 
     public boolean salvar(Venda venda) {
         try {
-            String query = "INSERT INTO VENDAS "
+            String query = "INSERT INTO venda "
                     + "(clienteId,vendedorId,servicoId,dataRealizacao) "
-                    + "VALUES (" + venda.getClienteId()+ "," + venda.getVendedorId()
-                    + "," + venda.getServicoId()+ "," + venda.getDataRealizacao()+")";
+                    + "VALUES ('" + venda.getClienteId()+ "','" + venda.getVendedorId()
+                    + "','" + venda.getServicoId()+ "','" + venda.getDataRealizacao()+"')";
 
             return db.ExecuteQuery(query);
 
@@ -33,10 +33,10 @@ public class VendaRepository {
 
     public boolean atualizar(Venda venda) {
         try {
-            String query = "UPDATE VENDAS set "
-                    + " clienteId = " + venda.getClienteId() + ", vendedorId = " + venda.getVendedorId()
-                    + ", servicoId = " + venda.getServicoId() + ", dataRealizacao = " + venda.getDataRealizacao()
-                    + " WHERE id = " + venda.getId();
+            String query = "UPDATE venda set "
+                    + " clienteId = '" + venda.getClienteId() + "', vendedorId = '" + venda.getVendedorId()
+                    + "', servicoId = '" + venda.getServicoId() + "', dataRealizacao = '" + venda.getDataRealizacao()
+                    + "' WHERE id = " + venda.getId();
 
             return db.ExecuteQuery(query);
 
@@ -47,7 +47,7 @@ public class VendaRepository {
 
     public boolean remover(int id) {
         try {
-            String query = "DELETE VENDAS "
+            String query = "DELETE venda "
                     + "where id = " + id;
 
             return db.ExecuteQuery(query);
@@ -59,7 +59,7 @@ public class VendaRepository {
 
     public Venda obterVenda(int id) {
         try {
-            String query = "SELECT * FROM VENDAS "
+            String query = "SELECT * FROM venda "
                     + "WHERE ID = " + id;
 
             Venda venda = new Venda();
@@ -86,7 +86,7 @@ public class VendaRepository {
         try {
             List<Venda> vendas = new ArrayList<Venda>();
 
-            String query = "SELECT * FROM VENDAS ";
+            String query = "SELECT * FROM venda ";
 
             ResultSet rs = db.ExecuteQuerySelect(query);
             while (rs.next()) {
