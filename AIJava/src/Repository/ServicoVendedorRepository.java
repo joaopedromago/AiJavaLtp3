@@ -66,7 +66,7 @@ public class ServicoVendedorRepository {
 
             ServicoVendedor servicoVendedor = new ServicoVendedor();
 
-            ResultSet rs = db.ExecuteQuerySelect(query);
+            ResultSet rs = null; //db.ExecuteQuerySelect(query);
             while (rs.next()) {
                 servicoVendedor = obterServicoVendedor(rs);
             }
@@ -90,7 +90,7 @@ public class ServicoVendedorRepository {
 
             String query = "SELECT * FROM servicoVendedor ";
 
-            ResultSet rs = db.ExecuteQuerySelect(query);
+            ResultSet rs = null; //db.ExecuteQuerySelect(query);
             while (rs.next()) {
                 ServicoVendedor servicoVendedor = obterServicoVendedor(rs);
                 servicoVendedors.add(servicoVendedor);

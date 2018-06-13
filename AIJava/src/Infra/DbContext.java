@@ -4,7 +4,11 @@ import java.sql.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.AbstractList;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import Util.*;
 
 public class DbContext {
 
@@ -32,7 +36,7 @@ public class DbContext {
         return true;
     }
 
-    public ResultSet ExecuteQuerySelect(String query) {
+    public List<Map<String, Object>> ExecuteQuerySelect(String query) {
 
         Statement stmt = null;
         try {
@@ -40,17 +44,20 @@ public class DbContext {
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery(query);
 
+            List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
+            Util.getHashMap(result,rs);
+            
             rs.close();
             stmt.close();
             c.close();
             System.out.println("Operation done successfully");
-            return rs;
+            return result;
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
         return null;
-    }
+    }   
 
     public Connection Open() {
 
@@ -58,7 +65,7 @@ public class DbContext {
             Connection c = null;
 
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            c = DriverManager.getConnection("jdbc:sqlite:SellSpace.db");
             c.setAutoCommit(false);
 
             System.out.println("Opened database successfully");

@@ -64,7 +64,7 @@ public class VendaRepository {
 
             Venda venda = new Venda();
 
-            ResultSet rs = db.ExecuteQuerySelect(query);
+            ResultSet rs = null; //db.ExecuteQuerySelect(query);
             while (rs.next()) {
                 venda = obterVenda(rs);
             }
@@ -88,7 +88,7 @@ public class VendaRepository {
 
             String query = "SELECT * FROM venda ";
 
-            ResultSet rs = db.ExecuteQuerySelect(query);
+            ResultSet rs = null; //db.ExecuteQuerySelect(query);
             while (rs.next()) {
                 Venda venda = obterVenda(rs);
                 vendas.add(venda);

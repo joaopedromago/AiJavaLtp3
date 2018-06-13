@@ -205,6 +205,7 @@ public class ServicoPage extends javax.swing.JFrame {
         } else {
             Salvar();
         }
+        PreencherGrid();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -307,11 +308,11 @@ public class ServicoPage extends javax.swing.JFrame {
         try {
             DefaultTableModel model = (DefaultTableModel) gridServico.getModel();
             
-            model.setRowCount(0);
-            model.setRowCount(servicos.size());
+           model.setRowCount(0);
+            // model.setRowCount(servicos.size());
             
             for (Servico item : servicos) {
-                model.addRow(new Object[]{item.getNome(), Util.obterTipoServicoPorParametro(item.getTipoServico()), item.getPreco()});
+                model.addRow(new Object[]{item.getId(), item.getNome(), Util.obterTipoServicoPorParametro(item.getTipoServico()), item.getPreco()});
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar tabela\n" + e.getMessage(), null, JOptionPane.ERROR_MESSAGE);

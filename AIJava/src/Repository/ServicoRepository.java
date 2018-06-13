@@ -3,10 +3,15 @@ package Repository;
 import Enum.TipoServico;
 import Infra.DbContext;
 import Model.Servico;
+import static Util.Util.obterTipoServico;
+import static java.lang.Double.max;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,10 +25,12 @@ public class ServicoRepository {
 
     public boolean salvar(Servico servico) {
         try {
+            Integer id = ThreadLocalRandom.current().nextInt(1, 100000 + 1);
+
             String query = "INSERT INTO servico "
-                    + "(nome,preco,tiposervico) "
-                    + "VALUES ('" + servico.getNome() + "','" + servico.getPreco()
-                    + "','" + servico.getTipoServico() + "')";
+                    + "(id, nome,preco,tiposervico) "
+                    + "VALUES (" + id + ",'" + servico.getNome() + "'  ,'" + servico.getPreco()
+ + "','" + servico.getTipoServico() + "')";
 
             return db.ExecuteQuery(query);
 
@@ -59,61 +66,44 @@ public class ServicoRepository {
     }
 
     public Servico obterServico(int id) {
-        try {
-            String query = "SELECT * FROM servico "
-                    + "WHERE ID = " + id;
+        String query = "SELECT * FROM servico "
+                + "WHERE ID = " + id;
 
-            Servico servico = new Servico();
+        Servico servico = new Servico();
 
-            ResultSet rs = db.ExecuteQuerySelect(query);
-            while (rs.next()) {
-                servico = obterServico(rs);
-            }
+        List<Map<String, Object>> result = db.ExecuteQuerySelect(query);
 
-            return servico;
-
-        } catch (SQLException e) {
-            try {
-                throw e;
-            } catch (SQLException ex) {
-                Logger.getLogger(ServicoRepository.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        for (Map<String, Object> i : result) {
+            servico = obterServico(i);
         }
 
-        return null;
+        return servico;
     }
 
     public List<Servico> obterServico() {
-        try {
-            List<Servico> servicos = new ArrayList<Servico>();
+        List<Servico> servicos = new ArrayList<Servico>();
 
-            String query = "SELECT * FROM servico ";
+        String query = "SELECT * FROM servico ";
 
-            ResultSet rs = db.ExecuteQuerySelect(query);
-            while (rs.next()) {
-                Servico servico = obterServico(rs);
-                servicos.add(servico);
-            }
+        List<Map<String, Object>> result = db.ExecuteQuerySelect(query);
 
-            return servicos;
-        } catch (Exception e) {
-            try {
-                throw e;
-            } catch (Exception ex) {
-                Logger.getLogger(ServicoRepository.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        for (Map<String, Object> i : result) {
+            servicos.add(obterServico(i));
         }
-        return null;
+
+        return servicos;
     }
 
-    private Servico obterServico(ResultSet rs) throws SQLException {
+    private Servico obterServico(Map<String, Object> map) {
+
         Servico servico = new Servico();
-        servico.setId(rs.getInt("id"));
-        servico.setDataCriacao(rs.getDate("dataCriacao"));
-        servico.setDataExclusao(rs.getDate("dataExclusao"));
-        servico.setNome(rs.getString("nome"));
-        servico.setPreco(rs.getDouble("preco"));
-        servico.setTipoServico(TipoServico.values()[rs.getInt("tipoServico")]);
+
+        Object test = map.get("id");
+
+        servico.setId(Integer.parseInt(map.get("id").toString()));
+        servico.setNome(map.get("nome").toString());
+        servico.setPreco(Double.parseDouble(map.get("preco").toString()));
+        servico.setTipoServico(obterTipoServico(map.get("tipoServico").toString()));
 
         return servico;
     }

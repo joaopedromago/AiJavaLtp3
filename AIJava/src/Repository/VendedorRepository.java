@@ -59,7 +59,7 @@ public class VendedorRepository {
             throw e;
         }
     }
-
+    
     public Vendedor obterVendedor(int id) {
         try {
             String query = "SELECT * FROM vendedor "
@@ -67,7 +67,7 @@ public class VendedorRepository {
 
             Vendedor vendedor = new Vendedor();
 
-            ResultSet rs = db.ExecuteQuerySelect(query);
+            ResultSet rs = null; //db.ExecuteQuerySelect(query);
             while (rs.next()) {
                 vendedor = obterVendedor(rs);
             }
@@ -91,7 +91,7 @@ public class VendedorRepository {
 
             String query = "SELECT * FROM vendedor ";
 
-            ResultSet rs = db.ExecuteQuerySelect(query);
+            ResultSet rs = null; //db.ExecuteQuerySelect(query);
             while (rs.next()) {
                 Vendedor vendedor = obterVendedor(rs);
                 vendedors.add(vendedor);

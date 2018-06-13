@@ -10,6 +10,12 @@ import java.awt.Desktop;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -96,7 +102,7 @@ public class Util {
 
         return retorno;
     }
-    
+
     public static String obterTipoServicoPorParametro(TipoServico tipoServico) {
         String retorno = "";
         switch (tipoServico) {
@@ -124,5 +130,20 @@ public class Util {
         }
 
         return retorno;
+    }
+
+    public static void getHashMap(List<Map<String, Object>> row, ResultSet rs_SubItemType) throws SQLException {
+
+        ResultSetMetaData metaData = rs_SubItemType.getMetaData();
+        int colCount = metaData.getColumnCount();
+
+        while (rs_SubItemType.next()) {
+            Map<String, Object> columns = new HashMap<String, Object>();
+            for (int i = 1; i <= colCount; i++) {
+                columns.put(metaData.getColumnLabel(i), rs_SubItemType.getObject(i));
+            }
+
+            row.add(columns);
+        }
     }
 }

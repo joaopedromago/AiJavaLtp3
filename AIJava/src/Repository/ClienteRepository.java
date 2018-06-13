@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sql.rowset.CachedRowSet;
 
 public class ClienteRepository {
 
@@ -68,7 +69,7 @@ public class ClienteRepository {
 
             Cliente cliente = new Cliente();
 
-            ResultSet rs = db.ExecuteQuerySelect(query);
+            ResultSet rs = null; //db.ExecuteQuerySelect(query);
             while (rs.next()) {
                 cliente = obterCliente(rs);
             }
@@ -92,7 +93,7 @@ public class ClienteRepository {
 
             String query = "SELECT * FROM cliente ";
 
-            ResultSet rs = db.ExecuteQuerySelect(query);
+            ResultSet rs = null; //db.ExecuteQuerySelect(query);
             while (rs.next()) {
                 Cliente cliente = obterCliente(rs);
                 clientes.add(cliente);
