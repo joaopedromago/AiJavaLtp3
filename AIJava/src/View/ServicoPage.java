@@ -273,7 +273,7 @@ public class ServicoPage extends javax.swing.JFrame {
         }
         
         servico.setNome(txtNome.getText());
-        String itemSelecionado = Arrays.toString((String[]) cmbTipoServico.getSelectedItem());
+        String itemSelecionado = cmbTipoServico.getSelectedItem().toString();
         servico.setTipoServico(obterTipoServico(itemSelecionado));
         servico.setPreco(Double.parseDouble(txtPreco.getText()));
     }
