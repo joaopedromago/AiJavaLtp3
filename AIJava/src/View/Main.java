@@ -8,11 +8,14 @@ package View;
 import Util.Util;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Timer;
 
 /**
  *
@@ -21,12 +24,28 @@ import java.util.logging.Logger;
 public class Main extends javax.swing.JFrame {
 
     public Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+    Timer t;
+    ActionListener updateClockAction;
 
     /**
      * Creates new form Main
      */
     public Main() {
         initComponents();
+
+        /*
+        Timer t = new Timer(1000, updateClockAction);
+        t.start();
+
+        updateClockAction = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Assumes clock is a custom component
+                lblClock.setTime(System.currentTimeMillis());
+                // OR
+                // Assumes clock is a JLabel
+                lblClock.setText(new Date().toString());
+            }
+        }*/
     }
 
     /**
@@ -47,6 +66,8 @@ public class Main extends javax.swing.JFrame {
         lblOpcao = new javax.swing.JLabel();
         lblSubs = new javax.swing.JLabel();
         lblGithubLink = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        lblClock = new javax.swing.JLabel();
         pnlLogo = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
         lblLogo2 = new javax.swing.JLabel();
@@ -130,6 +151,8 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("V1.0");
+
         javax.swing.GroupLayout pnlOptionsLayout = new javax.swing.GroupLayout(pnlOptions);
         pnlOptions.setLayout(pnlOptionsLayout);
         pnlOptionsLayout.setHorizontalGroup(
@@ -141,16 +164,21 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(btnVenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnVendedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pnlOptionsLayout.createSequentialGroup()
-                        .addGroup(pnlOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSubs)
-                            .addComponent(lblGithubLink))
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(btnServico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOptionsLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)))
+                        .addGap(40, 40, 40))
+                    .addGroup(pnlOptionsLayout.createSequentialGroup()
+                        .addGroup(pnlOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblSubs)
+                            .addGroup(pnlOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlOptionsLayout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblClock))
+                                .addComponent(lblGithubLink, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlOptionsLayout.setVerticalGroup(
@@ -168,7 +196,11 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(btnServico, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 316, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 296, Short.MAX_VALUE)
+                .addGroup(pnlOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lblClock))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblSubs)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblGithubLink)
@@ -232,26 +264,6 @@ public class Main extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_btnExitActionPerformed
-
-    private void btnVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendaActionPerformed
-        new VendaPage().setVisible(true);
-    }//GEN-LAST:event_btnVendaActionPerformed
-
-    private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
-        new ClientePage().setVisible(true);
-    }//GEN-LAST:event_btnClienteActionPerformed
-
-    private void btnVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendedorActionPerformed
-        new VendedorPage().setVisible(true);
-    }//GEN-LAST:event_btnVendedorActionPerformed
-
-    private void btnServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServicoActionPerformed
-        new ServicoPage().setVisible(true);
-    }//GEN-LAST:event_btnServicoActionPerformed
-
     private void lblGithubLinkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblGithubLinkMouseClicked
         Util objUtil = new Util();
         try {
@@ -262,6 +274,26 @@ public class Main extends javax.swing.JFrame {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_lblGithubLinkMouseClicked
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnExitActionPerformed
+
+    private void btnServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServicoActionPerformed
+        new ServicoPage().setVisible(true);
+    }//GEN-LAST:event_btnServicoActionPerformed
+
+    private void btnVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendedorActionPerformed
+        new VendedorPage().setVisible(true);
+    }//GEN-LAST:event_btnVendedorActionPerformed
+
+    private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
+        new ClientePage().setVisible(true);
+    }//GEN-LAST:event_btnClienteActionPerformed
+
+    private void btnVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendaActionPerformed
+        new VendaPage().setVisible(true);
+    }//GEN-LAST:event_btnVendaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -304,6 +336,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton btnServico;
     private javax.swing.JButton btnVenda;
     private javax.swing.JButton btnVendedor;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblClock;
     private javax.swing.JLabel lblGithubLink;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblLogo2;
