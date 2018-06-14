@@ -52,7 +52,7 @@ public class ClienteRepository {
 
     public boolean remover(int id) {
         try {
-            String query = "DELETE cliente "
+            String query = "DELETE from cliente "
                     + "where id = " + id;
 
             return db.ExecuteQuery(query);

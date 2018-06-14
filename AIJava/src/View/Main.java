@@ -68,17 +68,17 @@ public class Main extends javax.swing.JFrame {
         lblGithubLink = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         lblClock = new javax.swing.JLabel();
-        pnlLogo = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
-        lblLogo2 = new javax.swing.JLabel();
+        pnlLogo = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SellSpace");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setLocation(new java.awt.Point(0, 0));
         setLocationByPlatform(true);
-        setMaximumSize(new java.awt.Dimension(1024, 768));
-        setMinimumSize(new java.awt.Dimension(1024, 768));
+        setMaximumSize(new java.awt.Dimension(960, 570));
+        setMinimumSize(new java.awt.Dimension(960, 570));
         setName("frameMain"); // NOI18N
         setResizable(false);
 
@@ -153,6 +153,10 @@ public class Main extends javax.swing.JFrame {
 
         jLabel1.setText("V1.0");
 
+        lblLogo.setFont(new java.awt.Font("Vladimir Script", 1, 36)); // NOI18N
+        lblLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLogo.setText("SellSpace");
+
         javax.swing.GroupLayout pnlOptionsLayout = new javax.swing.GroupLayout(pnlOptions);
         pnlOptions.setLayout(pnlOptionsLayout);
         pnlOptionsLayout.setHorizontalGroup(
@@ -180,11 +184,17 @@ public class Main extends javax.swing.JFrame {
                                 .addComponent(lblGithubLink, javax.swing.GroupLayout.Alignment.LEADING)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(pnlOptionsLayout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlOptionsLayout.setVerticalGroup(
             pnlOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlOptionsLayout.createSequentialGroup()
-                .addGap(55, 55, 55)
+                .addContainerGap()
+                .addComponent(lblLogo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblOpcao, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -196,7 +206,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(btnServico, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 296, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                 .addGroup(pnlOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(lblClock))
@@ -208,38 +218,21 @@ public class Main extends javax.swing.JFrame {
         );
 
         pnlLogo.setBackground(new java.awt.Color(255, 255, 255));
-
-        lblLogo.setFont(new java.awt.Font("Vladimir Script", 1, 90)); // NOI18N
-        lblLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblLogo.setText("SellSpace");
-
-        lblLogo2.setFont(new java.awt.Font("Vladimir Script", 0, 32)); // NOI18N
-        lblLogo2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblLogo2.setText("You search, you find");
+        pnlLogo.setToolTipText("");
 
         javax.swing.GroupLayout pnlLogoLayout = new javax.swing.GroupLayout(pnlLogo);
         pnlLogo.setLayout(pnlLogoLayout);
         pnlLogoLayout.setHorizontalGroup(
             pnlLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlLogoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlLogoLayout.createSequentialGroup()
-                        .addComponent(lblLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(pnlLogoLayout.createSequentialGroup()
-                        .addComponent(lblLogo2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(20, 20, 20))))
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         pnlLogoLayout.setVerticalGroup(
             pnlLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlLogoLayout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addComponent(lblLogo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblLogo2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 0, Short.MAX_VALUE)
         );
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/menu.jpg"))); // NOI18N
+        jLabel2.setVerifyInputWhenFocusTarget(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -248,7 +241,9 @@ public class Main extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(10, 10, 10)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -257,7 +252,8 @@ public class Main extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlOptions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(pnlOptions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2)))
         );
 
         pack();
@@ -337,10 +333,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton btnVenda;
     private javax.swing.JButton btnVendedor;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblClock;
     private javax.swing.JLabel lblGithubLink;
     private javax.swing.JLabel lblLogo;
-    private javax.swing.JLabel lblLogo2;
     private javax.swing.JLabel lblOpcao;
     private javax.swing.JLabel lblSubs;
     private javax.swing.JPanel pnlLogo;

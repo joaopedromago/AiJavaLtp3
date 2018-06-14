@@ -25,11 +25,9 @@ public class ServicoRepository {
 
     public boolean salvar(Servico servico) {
         try {
-            Integer id = ThreadLocalRandom.current().nextInt(1, 100000 + 1);
-
             String query = "INSERT INTO servico "
-                    + "(id, nome,preco,tiposervico) "
-                    + "VALUES (" + id + ",'" + servico.getNome() + "'  ,'" + servico.getPreco()
+                    + "(nome,preco,tiposervico) "
+                    + "VALUES ('" + servico.getNome() + "'  ,'" + servico.getPreco()
  + "','" + servico.getTipoServico() + "')";
 
             return db.ExecuteQuery(query);
@@ -55,7 +53,7 @@ public class ServicoRepository {
 
     public boolean remover(int id) {
         try {
-            String query = "DELETE servico "
+            String query = "DELETE from servico "
                     + "where id = " + id;
 
             return db.ExecuteQuery(query);

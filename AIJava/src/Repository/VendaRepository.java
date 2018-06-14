@@ -47,7 +47,7 @@ public class VendaRepository {
 
     public boolean remover(int id) {
         try {
-            String query = "DELETE venda "
+            String query = "DELETE from venda "
                     + "where id = " + id;
 
             return db.ExecuteQuery(query);

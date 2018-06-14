@@ -10,6 +10,9 @@ import Enum.TipoServico;
 import Model.Servico;
 import Util.Util;
 import static Util.Util.obterTipoServico;
+import static Util.Util.obterintTipoServicoPorParametro;
+import static Util.Util.showMessage;
+import static Util.Util.tryParseDouble;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,7 +26,7 @@ import javax.swing.table.TableModel;
  * @author n226814168
  */
 public class ServicoPage extends javax.swing.JFrame {
-    
+
     public Servico servico;
     public List<Servico> servicos;
     ServicoController servicoController;
@@ -57,6 +60,7 @@ public class ServicoPage extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         gridServico = new javax.swing.JTable();
         cmbTipoServico = new javax.swing.JComboBox<>();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -134,6 +138,16 @@ public class ServicoPage extends javax.swing.JFrame {
         cmbTipoServico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Limpeza", "Manutenção", "Mudança", "PetShop", "Acompanhante", "Garçom", "Encomenda" }));
         cmbTipoServico.setName("cmbTipoServico"); // NOI18N
 
+        jButton3.setBackground(new java.awt.Color(51, 153, 255));
+        jButton3.setText("Limpar");
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButton3.setName("btnSalvar"); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -144,7 +158,9 @@ public class ServicoPage extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2))
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 735, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(13, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -178,7 +194,8 @@ public class ServicoPage extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
                 .addContainerGap())
@@ -199,19 +216,24 @@ public class ServicoPage extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPrecoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        MontarServico();
-        if (servico.getId() > 0) {
-            Atualizar();
-        } else {
-            Salvar();
+        if (ValidarItem()) {
+            MontarServico();
+            if (servico.getId() > 0) {
+                Atualizar();
+            } else {
+                Salvar();
+            }
+            LimparTela();
+            PreencherGrid();
         }
-        PreencherGrid();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (servico != null) {
             if (servico.getId() > 0) {
-                servicoController.ExcluirServico(servico.getId());
+                servicos = servicoController.ExcluirServico(servico.getId());
+                LimparTela();
+                PreencherGrid();
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -219,9 +241,13 @@ public class ServicoPage extends javax.swing.JFrame {
     private void gridServicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridServicoMouseClicked
         JTable source = (JTable) evt.getSource();
         int row = source.rowAtPoint(evt.getPoint());
-        
+
         CarregarServico(source.getModel(), row);
     }//GEN-LAST:event_gridServicoMouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        LimparTela();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -257,60 +283,59 @@ public class ServicoPage extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public void Salvar() {
         servicos = servicoController.SalvarServico(servico);
         servico = null;
     }
-    
+
     public void Atualizar() {
         servicos = servicoController.AlterarServico(servico);
         servico = null;
     }
-    
+
     public void MontarServico() {
         if (servico == null) {
             servico = new Servico();
         }
-        
+
         servico.setNome(txtNome.getText());
         String itemSelecionado = cmbTipoServico.getSelectedItem().toString();
         servico.setTipoServico(obterTipoServico(itemSelecionado));
         servico.setPreco(Double.parseDouble(txtPreco.getText()));
     }
-    
+
     public void CarregarServico(TableModel model, int row) {
         servico = new Servico();
 
         int id = Integer.parseInt(model.getValueAt(row, 0).toString());
         String nome = model.getValueAt(row, 1).toString();
-        int itemSelecionado = Integer.parseInt(model.getValueAt(row, 2).toString());
-        TipoServico tipoServico = obterTipoServico(itemSelecionado);
+        TipoServico tipoServico = obterTipoServico(model.getValueAt(row, 2).toString());
         Double preco = Double.parseDouble(model.getValueAt(row, 3).toString());
-        
+
         servico.setId(id);
         servico.setNome(nome);
         servico.setTipoServico(tipoServico);
         servico.setPreco(preco);
-        
-        cmbTipoServico.setSelectedIndex(itemSelecionado);
+
+        cmbTipoServico.setSelectedIndex(obterintTipoServicoPorParametro(tipoServico));
         txtNome.setText(nome);
         txtPreco.setText(preco.toString());
     }
-    
+
     public void LimparTela() {
         cmbTipoServico.setSelectedIndex(0);
         txtNome.setText("");
         txtPreco.setText("");
     }
-    
+
     public void PreencherGrid() {
         try {
             DefaultTableModel model = (DefaultTableModel) gridServico.getModel();
-            
-           model.setRowCount(0);
+
+            model.setRowCount(0);
             // model.setRowCount(servicos.size());
-            
+
             for (Servico item : servicos) {
                 model.addRow(new Object[]{item.getId(), item.getNome(), Util.obterTipoServicoPorParametro(item.getTipoServico()), item.getPreco()});
             }
@@ -319,11 +344,37 @@ public class ServicoPage extends javax.swing.JFrame {
         }
     }
 
+    public Boolean ValidarItem() {
+
+        if (txtNome.getText() == null) {
+            showMessage("O nome deve conter pelo menos 3 caractéres", "Erro ao validar campos");
+            return false;
+        }
+
+        if (txtNome.getText().length() < 3) {
+            showMessage("O nome deve conter pelo menos 3 caractéres", "Erro ao validar campos");
+            return false;
+        }
+
+        if (txtPreco.getText() == null || txtPreco.getText() == "") {
+            showMessage("Você deve informar o preço", "Erro ao validar campos");
+            return false;
+        }
+
+        if (!tryParseDouble(txtPreco.getText())) {
+            showMessage("Você deve informar um preço válido", "Erro ao validar campos");
+            return false;
+        }
+
+        return true;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JComboBox<String> cmbTipoServico;
     private javax.swing.JTable gridServico;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

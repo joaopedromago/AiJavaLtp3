@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,9 +22,9 @@ public class VendedorRepository {
         try {
             String query = "INSERT INTO vendedor "
                     + "(nome,cpf,rg,endereco,telefone,email) "
-                    + "VALUES ('" + vendedor.getNome() + "','" + vendedor.getCpf() 
-                    + "','" + vendedor.getRg() + "','" + vendedor.getEndereco() 
-                    + "','" + vendedor.getTelefone() + "','" + vendedor.getEmail() 
+                    + "VALUES ('" + vendedor.getNome() + "','" + vendedor.getCpf()
+                    + "','" + vendedor.getRg() + "','" + vendedor.getEndereco()
+                    + "','" + vendedor.getTelefone() + "','" + vendedor.getEmail()
                     + "')";
 
             return db.ExecuteQuery(query);
@@ -36,9 +37,9 @@ public class VendedorRepository {
     public boolean atualizar(Vendedor vendedor) {
         try {
             String query = "UPDATE vendedor set "
-+ " nome = '" + vendedor.getNome() + "', cpf = '" + vendedor.getCpf() 
-+ "', rg = '" + vendedor.getRg() + "', endereço = '" + vendedor.getEndereco() 
-+ "', telefone = '" + vendedor.getTelefone() + "', email = '" + vendedor.getEmail()
+                    + " nome = '" + vendedor.getNome() + "', cpf = '" + vendedor.getCpf()
+                    + "', rg = '" + vendedor.getRg() + "', endereco = '" + vendedor.getEndereco()
+                    + "', telefone = '" + vendedor.getTelefone() + "', email = '" + vendedor.getEmail()
                     + "' WHERE id = " + vendedor.getId();
 
             return db.ExecuteQuery(query);
@@ -50,7 +51,7 @@ public class VendedorRepository {
 
     public boolean remover(int id) {
         try {
-            String query = "DELETE vendedor "
+            String query = "DELETE from vendedor "
                     + "where id = " + id;
 
             return db.ExecuteQuery(query);
@@ -59,30 +60,20 @@ public class VendedorRepository {
             throw e;
         }
     }
-    
+
     public Vendedor obterVendedor(int id) {
-        try {
-            String query = "SELECT * FROM vendedor "
-                    + "WHERE ID = " + id;
+        String query = "SELECT * FROM vendedor "
+                + "WHERE ID = " + id;
 
-            Vendedor vendedor = new Vendedor();
+        Vendedor vendedor = new Vendedor();
 
-            ResultSet rs = null; //db.ExecuteQuerySelect(query);
-            while (rs.next()) {
-                vendedor = obterVendedor(rs);
-            }
+        List<Map<String, Object>> result = db.ExecuteQuerySelect(query);
 
-            return vendedor;
-
-        } catch (SQLException e) {
-            try {
-                throw e;
-            } catch (SQLException ex) {
-                Logger.getLogger(VendedorRepository.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        for (Map<String, Object> i : result) {
+            vendedor = obterVendedor(i);
         }
 
-        return null;
+        return vendedor;
     }
 
     public List<Vendedor> obterVendedor() {
@@ -91,9 +82,10 @@ public class VendedorRepository {
 
             String query = "SELECT * FROM vendedor ";
 
-            ResultSet rs = null; //db.ExecuteQuerySelect(query);
-            while (rs.next()) {
-                Vendedor vendedor = obterVendedor(rs);
+            List<Map<String, Object>> result = db.ExecuteQuerySelect(query);
+
+            for (Map<String, Object> i : result) {
+                Vendedor vendedor = obterVendedor(i);
                 vendedors.add(vendedor);
             }
 
@@ -108,17 +100,16 @@ public class VendedorRepository {
         return null;
     }
 
-    private Vendedor obterVendedor(ResultSet rs) throws SQLException {
+    private Vendedor obterVendedor(Map<String, Object> map) {
         Vendedor vendedor = new Vendedor();
-        vendedor.setId(rs.getInt("id"));
-        vendedor.setDataCriacao(rs.getDate("dataCriacao"));
-        vendedor.setDataExclusao(rs.getDate("dataExclusao"));
-        vendedor.setNome(rs.getString("nome"));
-        vendedor.setCpf(rs.getString("cpf"));
-        vendedor.setRg(rs.getString("rg"));
-        vendedor.setEndereco(rs.getString("endereço"));
-        vendedor.setTelefone(rs.getString("telefone"));
-        vendedor.setEmail(rs.getString("email"));
+
+        vendedor.setId(Integer.parseInt(map.get("id").toString()));
+        vendedor.setNome(map.get("nome").toString());
+        vendedor.setCpf(map.get("cpf").toString());
+        vendedor.setRg(map.get("rg").toString());
+        vendedor.setEndereco(map.get("endereco").toString());
+        vendedor.setTelefone(map.get("telefone").toString());
+        vendedor.setEmail(map.get("email").toString());
 
         return vendedor;
     }

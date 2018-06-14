@@ -2,10 +2,13 @@ package Repository;
 
 import Infra.DbContext;
 import Model.ServicoVendedor;
+import Model.Vendedor;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,7 +24,7 @@ public class ServicoVendedorRepository {
         try {
             String query = "INSERT INTO servicoVendedor "
                     + "(quantidadeServicos,servicoId,vendedorId) "
-                    + "VALUES ('" + servicoVendedor.getQuantidadeServicos() + "','" 
+                    + "VALUES ('" + servicoVendedor.getQuantidadeServicos() + "','"
                     + servicoVendedor.getServicoId()
                     + "','" + servicoVendedor.getVendedorId() + "')";
 
@@ -49,7 +52,7 @@ public class ServicoVendedorRepository {
 
     public boolean remover(int id) {
         try {
-            String query = "DELETE servicoVendedor "
+            String query = "DELETE from servicoVendedor "
                     + "where id = " + id;
 
             return db.ExecuteQuery(query);
@@ -60,61 +63,42 @@ public class ServicoVendedorRepository {
     }
 
     public ServicoVendedor obterServicoVendedor(int id) {
-        try {
-            String query = "SELECT * FROM servicoVendedor "
-                    + "WHERE ID = " + id;
+        String query = "SELECT * FROM servicoVendedor "
+                + "WHERE ID = " + id;
 
-            ServicoVendedor servicoVendedor = new ServicoVendedor();
+        ServicoVendedor servicoVendedor = new ServicoVendedor();
 
-            ResultSet rs = null; //db.ExecuteQuerySelect(query);
-            while (rs.next()) {
-                servicoVendedor = obterServicoVendedor(rs);
-            }
+        List<Map<String, Object>> result = db.ExecuteQuerySelect(query);
 
-            return servicoVendedor;
-
-        } catch (SQLException e) {
-            try {
-                throw e;
-            } catch (SQLException ex) {
-                Logger.getLogger(ServicoVendedorRepository.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        for (Map<String, Object> i : result) {
+            servicoVendedor = obterServicoVendedor(i);
         }
 
-        return null;
+        return servicoVendedor;
     }
 
     public List<ServicoVendedor> obterServicoVendedor() {
-        try {
-            List<ServicoVendedor> servicoVendedors = new ArrayList<ServicoVendedor>();
+        List<ServicoVendedor> servicoVendedors = new ArrayList<ServicoVendedor>();
 
-            String query = "SELECT * FROM servicoVendedor ";
+        String query = "SELECT * FROM servicoVendedor ";
 
-            ResultSet rs = null; //db.ExecuteQuerySelect(query);
-            while (rs.next()) {
-                ServicoVendedor servicoVendedor = obterServicoVendedor(rs);
-                servicoVendedors.add(servicoVendedor);
-            }
+        List<Map<String, Object>> result = db.ExecuteQuerySelect(query);
 
-            return servicoVendedors;
-        } catch (Exception e) {
-            try {
-                throw e;
-            } catch (Exception ex) {
-                Logger.getLogger(ServicoVendedorRepository.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        for (Map<String, Object> i : result) {
+            ServicoVendedor servicoVendedor = obterServicoVendedor(i);
+            servicoVendedors.add(servicoVendedor);
         }
-        return null;
+
+        return servicoVendedors;
     }
 
-    private ServicoVendedor obterServicoVendedor(ResultSet rs) throws SQLException {
+    private ServicoVendedor obterServicoVendedor(Map<String, Object> map) {
         ServicoVendedor servicoVendedor = new ServicoVendedor();
-        servicoVendedor.setId(rs.getInt("id"));
-        servicoVendedor.setDataCriacao(rs.getDate("dataCriacao"));
-        servicoVendedor.setDataExclusao(rs.getDate("dataExclusao"));
-        servicoVendedor.setQuantidadeServicos(rs.getInt("quantidadeServicos"));
-        servicoVendedor.setServicoId(rs.getInt("servicoId"));
-        servicoVendedor.setVendedorId(rs.getInt("vendedorId"));
+        
+        servicoVendedor.setId(Integer.parseInt(map.get("id").toString()));
+        servicoVendedor.setQuantidadeServicos(Integer.parseInt(map.get("quantidadeServicos").toString()));
+        servicoVendedor.setServicoId(Integer.parseInt(map.get("servicoId").toString()));
+        servicoVendedor.setVendedorId(Integer.parseInt(map.get("vendedorId").toString()));
 
         return servicoVendedor;
     }
