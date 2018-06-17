@@ -33,6 +33,25 @@ public class ClienteRepository {
             throw e;
         }
     }
+    
+    public boolean atualizarNumeroCompras(int clienteId, boolean adicionar){
+                try {
+            String query = "";
+            
+            if(adicionar){
+            query = "UPDATE cliente set "
+                    + " numeroCompras = numeroCompras + 1 WHERE id = " + clienteId;
+            } else {
+            query = "UPDATE cliente set "
+                    + " numeroCompras = numeroCompras - 1 WHERE id = " + clienteId;
+            }
+
+            return db.ExecuteQuery(query);
+
+        } catch (Exception e) {
+            throw e;
+        }          
+    }
 
     public boolean atualizar(Cliente cliente) {
         try {

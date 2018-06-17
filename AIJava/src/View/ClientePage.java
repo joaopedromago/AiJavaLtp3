@@ -5,17 +5,33 @@
  */
 package View;
 
+import Controller.ClienteController;
+import Model.Cliente;
+import static Util.Util.showMessage;
+import static Util.Util.validarCpf;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
 /**
  *
  * @author n226814168
  */
 public class ClientePage extends javax.swing.JFrame {
 
+    public Cliente cliente;
+    public List<Cliente> clientes;
+    ClienteController clienteController;
     /**
      * Creates new form ClientePage
      */
     public ClientePage() {
         initComponents();
+        clienteController = new ClienteController();
+        
+        clientes = clienteController.ObterListaCliente();
+        PreencherGrid();
     }
 
     /**
@@ -95,6 +111,11 @@ public class ClientePage extends javax.swing.JFrame {
         btnExcluir.setBackground(new java.awt.Color(255, 51, 51));
         btnExcluir.setText("Excluir");
         btnExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         gridCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -218,8 +239,27 @@ public class ClientePage extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCpfActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        // TODO add your handling code here:
+                if (ValidarItem()) {
+            MontarCliente();
+            if (cliente.getId() > 0) {
+                Atualizar();
+            } else {
+                Salvar();
+            }
+            LimparTela();
+            PreencherGrid();
+        }
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        if (cliente != null) {
+            if (cliente.getId() > 0) {
+                clientes = clienteController.ExcluirCliente(cliente.getId());
+                LimparTela();
+                PreencherGrid();
+            }
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -254,6 +294,109 @@ public class ClientePage extends javax.swing.JFrame {
                 new ClientePage().setVisible(true);
             }
         });
+    }  
+    
+    public void Salvar() {
+        clientes = clienteController.SalvarCliente(cliente);
+        cliente = null;
+    }
+
+    public void Atualizar() {
+        clientes = clienteController.AlterarCliente(cliente);
+        cliente = null;
+    }
+
+    public void MontarCliente() {
+        if (cliente == null) {
+            cliente = new Cliente();
+        }
+
+        cliente.setNome(txtNome.getText());
+        cliente.setCpf(txtCpf.getText());
+        cliente.setEmail(txtEmail.getText());
+        cliente.setEndereco(txtEndereco.getText());
+        cliente.setRg(txtRg.getText());
+        cliente.setTelefone(txtTelefone.getText());
+    }
+
+    public void CarregarCliente(TableModel model, int row) {
+        cliente = new Cliente();
+
+        int id = Integer.parseInt(model.getValueAt(row, 0).toString());
+        String nome = model.getValueAt(row, 1).toString();
+        String cpf = model.getValueAt(row, 2).toString();
+        String rg = model.getValueAt(row, 3).toString();
+        String email = model.getValueAt(row, 4).toString();
+        String telefone = model.getValueAt(row, 5).toString();
+        String endereco = model.getValueAt(row, 6).toString();
+
+        cliente = clienteController.ObterCliente(id);
+
+//        cliente.setId(id);
+//        cliente.setNome(nome);
+//        cliente.setCpf(cpf);
+//        cliente.setEmail(rg);
+//        cliente.setEndereco(email);
+//        cliente.setRg(telefone);
+//        cliente.setTelefone(endereco);
+        txtNome.setText(nome);
+        txtCpf.setText(cpf);
+        txtEmail.setText(email);
+        txtEndereco.setText(endereco);
+        txtRg.setText(rg);
+        txtTelefone.setText(telefone);
+    }
+
+    public void LimparTela() {
+        txtNome.setText("");
+        txtCpf.setText("");
+        txtEmail.setText("");
+        txtEndereco.setText("");
+        txtRg.setText("");
+        txtTelefone.setText("");
+    }
+
+    public void PreencherGrid() {
+        try {
+            DefaultTableModel model = (DefaultTableModel) gridCliente.getModel();
+
+            model.setRowCount(0);
+            // model.setRowCount(clientes.size());
+
+            for (Cliente item : clientes) {
+                model.addRow(new Object[]{
+                    item.getId(),
+                    item.getNome(),
+                    item.getCpf(),
+                    item.getEmail(),
+                    item.getEndereco(),
+                    item.getRg(),
+                    item.getTelefone()});
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar tabela\n" + e.getMessage(), null, JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    
+    public Boolean ValidarItem() {
+
+        if (txtNome.getText() == null) {
+            showMessage("O nome deve conter pelo menos 3 caractéres", "Erro ao validar campos");
+            return false;
+        }
+
+        if (txtNome.getText().length() < 3) {
+            showMessage("O nome deve conter pelo menos 3 caractéres", "Erro ao validar campos");
+            return false;
+        }
+        
+        if(!validarCpf(txtCpf.getText())){
+            showMessage("Cpf em formato inválido", "Erro ao validar campos");
+            return false;
+        }
+
+        return true;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

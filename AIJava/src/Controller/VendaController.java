@@ -5,6 +5,8 @@ import Model.Servico;
 import Model.ServicoVendedor;
 import Model.Venda;
 import Model.Vendedor;
+import Repository.ClienteRepository;
+import Repository.ServicoVendedorRepository;
 import Repository.VendaRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,8 @@ import java.util.List;
 public class VendaController {
 
     VendaRepository repo;
+    ClienteRepository clienteRepo;
+    ServicoVendedorRepository servicovendedorRepo;
 
     public VendaController() {
         repo = new VendaRepository();
@@ -20,7 +24,9 @@ public class VendaController {
     public List<Venda> SalvarVenda(Venda venda) {
 
         repo.salvar(venda);
-
+        clienteRepo.atualizarNumeroCompras(venda.getClienteId(), true);
+        servicovendedorRepo.atualizarEstoque(venda.getVendedorId(), venda.getServicoId(), false);
+        
         return ObterListaVenda();
     }
 

@@ -34,6 +34,27 @@ public class ServicoVendedorRepository {
             throw e;
         }
     }
+    
+    public boolean atualizarEstoque(int servicoId, int vendedorId, boolean adicionar){
+        try {
+            String query = "";
+            
+            if(adicionar){
+            query = "UPDATE servicoVendedor set "
+                    + " quantidadeServicos = quantidadeServicos + 1 WHERE servicoId = " 
+                    + servicoId + " and vendedorId = " + vendedorId;
+            } else {
+            query = "UPDATE servicoVendedor set "
+                    + " quantidadeServicos = quantidadeServicos - 1 WHERE servicoId = " 
+                    + servicoId + " and vendedorId = " + vendedorId;
+            }
+
+            return db.ExecuteQuery(query);
+
+        } catch (Exception e) {
+            throw e;
+        }     
+    }
 
     public boolean atualizar(ServicoVendedor servicoVendedor) {
         try {
